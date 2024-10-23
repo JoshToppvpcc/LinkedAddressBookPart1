@@ -111,53 +111,42 @@ void orderedLinkedList<Type>::insertLast(const Type& newItem)
 {
 	insert(newItem);
 }//end insertLast
-template<class Type>
-void orderedLinkedList<Type>::deleteNode(const Type& deleteItem)
-{
-	nodeType<Type>* current; //pointer to traverse the list
-	nodeType<Type>* trailCurrent = nullptr; //pointer just
-	//before current
-	bool found;
-	if (this->first == nullptr) //Case 1
-		cout << "Cannot delete from an empty list." << endl;
-	else
-	{
-		current = this->first;
-		found = false;
-		while (current != nullptr && !found) //search the list
-			if (current->info >= deleteItem)
-				found = true;
-			else
-			{
-				trailCurrent = current;
-				current = current->link;
-			}
-		if (current == nullptr) //Case 4
-			cout << "The item to be deleted is not in the "
-			<< "list." << endl;
-		else
-			if (current->info == deleteItem) //the item to be
-				//deleted is in the list
-			{
-				if (this->first == current) //Case 2
-				{
-					this->first = this->first->link;
-					if (this->first == nullptr)
-						this->last = nullptr;
-					delete current;
-				}
-				else //Case 3
-				{
-					trailCurrent->link = current->link;
-					if (current == this->last)
-						this->last = trailCurrent;
-					delete current;
-				}
-				this->count--;
-			}
-			else //Case 4
-				cout << "The item to be deleted is not in the "
-				<< "list." << endl;
+template <class Type>
+void orderedLinkedList<Type>::deleteNode(const Type& deleteItem) {
+	nodeType<Type>* current = this->first; // Pointer to traverse the list
+	nodeType<Type>* trailCurrent = nullptr; // Pointer just before current
+	bool found = false;
+
+	while (current != nullptr && !found) {
+		if (current->info == deleteItem) {
+			found = true; // Item found
+		}
+		else {
+			trailCurrent = current;
+			current = current->link;
+		}
 	}
-}//end deleteNode
+
+	if (current == nullptr) {
+		std::cout << "The item to be deleted is not in the list." << std::endl;
+	}
+	else {
+		if (this->first == current) {
+			// Case: Deleting the first node
+			this->first = this->first->link;
+			if (this->first == nullptr) {
+				this->last = nullptr; // List is now empty
+			}
+		}
+		else {
+			// Case: Deleting a node other than the first
+			trailCurrent->link = current->link;
+			if (current == this->last) {
+				this->last = trailCurrent; // Update last pointer
+			}
+		}
+		delete current; // Free memory
+		this->count--; // Decrease count
+	}
+}
 #endif

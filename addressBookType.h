@@ -20,7 +20,24 @@ public:
         insert(newPerson); // Insert into the ordered linked list
     }
 
-    void deleteEntry();
+    void deleteEntry(const std::string& firstName, const std::string& lastName) {
+        std::string fName, lName;
+
+        // Prompt the user for the first name of the entry to delete
+        std::cout << "Enter first name of the entry to delete: ";
+        std::cin >> fName;
+
+        // Prompt the user for the last name of the entry to delete
+        std::cout << "Enter last name of the entry to delete: ";
+        std::cin >> lName;
+
+        // Create a temporary extPersonType object to search for
+        extPersonType searchPerson(fName, lName, "", dateType(), "", "", "", "", "");
+
+        // Call deleteNode on the contactList member and check if it was successful
+        deleteNode(searchPerson);
+
+    }
 
     // Function to initialize entries from the file
     void initEntry(const std::string& filename) {
@@ -72,8 +89,7 @@ public:
         std::cout << "File reading complete.\n";  // Debug output
     }
 
-    void deleteEntry(){
-    }
+    
     // Function to find a person by last name
     void findPerson(const std::string& fName, std::string& lName) const {
         nodeType<extPersonType>* current = this->first;  // Start at the first node
