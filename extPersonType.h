@@ -58,9 +58,28 @@ public:
     std::string getRelationship() const {
         return relationship;
     }
+    std::string getPhoneNumber() const {
+        return phoneNumber;
+    }
+    std::string getStreetAddress() const {
+        return streetAddress;
+    }
+    std::string getZipCode() const {
+        return zipCode;
+    }
+    std::string getCity() const {
+        return city;
+    }
+    std::string getState() const {
+        return state;
+    }
     // Getter functions for firstName and lastName
-    std::string getFirstName() const { return firstName; }
-    std::string getLastName() const { return lastName; }
+    std::string getFirstName() const { 
+        return firstName; 
+    }
+    std::string getLastName() const { 
+        return lastName; 
+    }
 
     // Function to print the person info 
     void print() const {

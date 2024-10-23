@@ -19,8 +19,39 @@ public:
     void addEntry(const extPersonType& newPerson) {
         insert(newPerson); // Insert into the ordered linked list
     }
+    void addNewEntry() {
+        std::string fName, lName, rel, street, city, state, zip, phone;
+        int month, day, year;
 
-    void deleteEntry(const std::string& firstName, const std::string& lastName) {
+        // Get user input
+        std::cout << "Enter first name: ";
+        std::cin >> fName;
+        std::cout << "Enter last name: ";
+        std::cin >> lName;
+        std::cout << "Enter relationship: ";
+        std::cin >> rel;
+        std::cout << "Enter birthdate (month day year): ";
+        std::cin >> month >> day >> year;
+        std::cout << "Enter street address: ";
+        std::cin.ignore(); // Clear newline from input buffer
+        std::getline(std::cin, street);
+        std::cout << "Enter city: ";
+        std::getline(std::cin, city);
+        std::cout << "Enter state: ";
+        std::getline(std::cin, state);
+        std::cout << "Enter zip code: ";
+        std::getline(std::cin, zip);
+        std::cout << "Enter phone number: ";
+        std::getline(std::cin, phone);
+
+        dateType birthDate(month, day, year); // Create date object
+        extPersonType newPerson(fName, lName, rel, birthDate, street, city, state, zip, phone);
+
+        insert(newPerson); // Insert into the address book
+        std::cout << "New entry added successfully." << std::endl;
+    }
+
+    void deleteEntry() {
         std::string fName, lName;
 
         // Prompt the user for the first name of the entry to delete
@@ -39,6 +70,29 @@ public:
 
     }
 
+    void saveToFile(){
+        std::ofstream outfile("AddressData.txt"); // Declare and open the file
+        nodeType<extPersonType>* current = this->first;
+        while (current != nullptr) {
+            outfile << current->info.getFirstName() << " "
+                << current->info.getLastName() << " "
+                << current->info.getRelationship() << " "
+                << current->info.getBirthDate().getMonth() << " "
+                << current->info.getBirthDate().getDay() << " "
+                << current->info.getBirthDate().getYear() << " "
+                << current->info.getStreetAddress() << " "
+                << current->info.getCity() << " "
+                << current->info.getState() << " "
+                << current->info.getZipCode() << " "
+                << current->info.getPhoneNumber() << std::endl;
+
+            current = current->link; // Move to the next node
+        }
+
+        outfile.close();
+        std::cout << "Address book saved successfully." << std::endl;
+    }
+
     // Function to initialize entries from the file
     void initEntry(const std::string& filename) {
         std::ifstream infile("AddressData.txt");
@@ -52,6 +106,7 @@ public:
         std::cout << "File opened successfully.\n"; // Debug output
 
         std::string fName, lName, rel;
+    
         int month, day, year;
         std::string streetAddress, city, state, zipCode, phoneNumber;
 

@@ -7,7 +7,10 @@ void displayMenu() {
     std::cout << "1. Search by name" << std::endl;
     std::cout << "2. Search by relationship" << std::endl;
     std::cout << "3. Print all entries" << std::endl;
-    std::cout << "4. Exit" << std::endl;
+    std::cout << "4. Add an entry." << std::endl;
+    std::cout << "5. Remove an entry" << std::endl;
+    std::cout << "6. Save and Exit" << std::endl;
+    std::cout << "7. Exit" << std::endl;
     std::cout << "Enter your choice: ";
 }
 
@@ -52,6 +55,17 @@ int main() {
             break;
         }
         case 4: {
+            myAddressBook.addNewEntry();
+            break;
+        }
+        case 5: {
+            myAddressBook.deleteEntry();
+            break;
+        }
+        case 6: {
+            myAddressBook.saveToFile();
+        }
+        case 7: {
             // Exit
             exitProgram = true;
             std::cout << "Exiting program." << std::endl;
