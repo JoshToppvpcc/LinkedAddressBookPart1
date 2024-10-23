@@ -20,6 +20,8 @@ public:
         insert(newPerson); // Insert into the ordered linked list
     }
 
+    void deleteEntry();
+
     // Function to initialize entries from the file
     void initEntry(const std::string& filename) {
         std::ifstream infile("AddressData.txt");
@@ -70,7 +72,8 @@ public:
         std::cout << "File reading complete.\n";  // Debug output
     }
 
-
+    void deleteEntry(){
+    }
     // Function to find a person by last name
     void findPerson(const std::string& fName, std::string& lName) const {
         nodeType<extPersonType>* current = this->first;  // Start at the first node
